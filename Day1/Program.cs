@@ -9,7 +9,8 @@ namespace Day1
 		{
 			bool readLines = true;
 			List<int> inputs = new List<int>();
-			int totalFuel = 0;
+			int totalFuelP1 = 0;
+			int totalFuelP2 = 0;
 
 			Console.WriteLine("Enter day 1 input:");
 
@@ -25,6 +26,13 @@ namespace Day1
 
 			foreach (int moduleWeight in inputs)
 			{
+				totalFuelP1 += CalculateFuel(moduleWeight);
+			}
+
+			Console.WriteLine("The fuel required for all modules excluding fuel weight is: " + totalFuelP1);
+
+			foreach (int moduleWeight in inputs)
+			{
 				int baseModuleFuel = CalculateFuel(moduleWeight);
 				int fuelForFuelWeight = 0;
 				int remainingFuelToCalculate = baseModuleFuel;
@@ -35,10 +43,10 @@ namespace Day1
 					remainingFuelToCalculate = CalculateFuel(remainingFuelToCalculate);
 				}
 
-				totalFuel += baseModuleFuel + fuelForFuelWeight;
+				totalFuelP2 += baseModuleFuel + fuelForFuelWeight;
 			}
 
-			Console.WriteLine("The total fuel required for all modules including fuel weight is: " + totalFuel);
+			Console.WriteLine("The total fuel required for all modules including fuel weight is: " + totalFuelP2);
 		}
 
 		private static int CalculateFuel(int weight)
